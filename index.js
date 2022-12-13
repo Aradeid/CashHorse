@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
@@ -7,13 +6,19 @@ const port = 3000;
 let horses = []
 let bets = []
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');
+require('./controllers/horses')(app);
+
+app.storage = [];
+app.storage.horses = [];
 
 // index page
 app.get('/', function(req, res) {
+    console.log(app);
     res.render('pages/index');
 });
   
@@ -22,13 +27,8 @@ app.get('/about', function(req, res) {
     res.render('pages/about');
 });
 
-app.post('/bets', (req, res) => {
+app.post('/users', (req, res) => {
     //show own bets by default and all bets with admin rights
-});
-
-app.post('/horses', (req, res) => {
-    //TODO verify authentication
-    // We will be coding here
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`))
