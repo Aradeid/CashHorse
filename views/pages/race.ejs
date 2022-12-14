@@ -12,7 +12,18 @@
     </header>
 
     <main>
-        <p2><%= race.date %></p2>
+        <p><%= race.date %></p>
+        <p><%= race.description %></p>
+        <div class="item-list horse-list">
+            <% for(var i=0; i < horses.length; i++) { %>
+                <div class="list-item horse-list-item">
+                    <img src="images/horses/<%= horses[i].image %>">
+                    <a class="horse-name" href="/horses/<%= horses[i].id %>"><%= horses[i].name %></a>
+                    <p class="horse-power"><%= horses[i].power %></p>
+                    <p class="horse-breed"><%= horses[i].breed %></p>
+                </div>
+            <% } %>
+        </div>
     </main>
 
     <footer>

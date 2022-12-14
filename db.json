@@ -31,8 +31,19 @@
     {
       "time": "2022-12-15T21:59",
       "description": "cool race",
-      "horses": [],
+      "horses": [
+        0,
+        5
+      ],
       "id": 0
+    },
+    {
+      "time": "2023-01-07T07:08",
+      "description": "acer is a good computer i swear",
+      "horses": [
+        0
+      ],
+      "id": 1
     }
   ]
 }

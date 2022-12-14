@@ -8,7 +8,7 @@ module.exports = function(app){
         race.horses = []
         
         for (key in req.body) {
-            if (req.body[key] && key.includes("raceHorse")) {
+            if (key.includes("raceHorse")) {
                 race.horses.push(parseInt(key.slice(9)));
             }
         }
@@ -19,6 +19,8 @@ module.exports = function(app){
         } else {
             race.id = app.storage.get('races').value()[len-1].id + 1;
         }
+        console.log(race);
+        console.log(req.body);
         app.storage.get('races').push(race).write();
     
         console.log('New race added successfully', race);
@@ -38,7 +40,8 @@ module.exports = function(app){
             res.sendStatus(404);
             return;
         }
-        res.render('pages/race', {race: race});
+        let horses = app.storage.get("horses").filter((horse) => race.horses.includes(horse.id)).value();
+        res.render('pages/race', {race: race, horses: horses});
       });
 
 }
