@@ -10,7 +10,6 @@ module.exports = function(app){
         if (!horse.name || !horse.power || !horse.breed) {
             //TODO throw error
         }
-        console.log(app.storage.get('horses').value()[-1]);
         var len = app.storage.get('horses').value().length;
         if (len == 0) {
             horse.id = 0;
@@ -29,15 +28,9 @@ module.exports = function(app){
     });
 
     app.get('/horses/:id', function(req, res) {
-        var id = req.params.id;
-        var horse;
-        app.storage.get('horses').value().forEach(h => {
-            if (h.id == id) {
-                horse = h;
-                return;
-            }
-        });
-        if (horse == undefined) {
+        var id = parseInt(req.params.id);
+        var horse = app.storage.get("horses").find({"id": id}).value();
+        if (!horse) {
             res.sendStatus(404);
             return;
         }

@@ -27,5 +27,12 @@
   ],
   "users": [],
   "bets": [],
-  "races": []
+  "races": [
+    {
+      "time": "2022-12-15T21:59",
+      "description": "cool race",
+      "horses": [],
+      "id": 0
+    }
+  ]
 }

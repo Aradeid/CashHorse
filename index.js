@@ -14,6 +14,7 @@ app.use(express.static('public'))
 
 app.set('view engine', 'ejs');
 require('./controllers/horses')(app);
+require('./controllers/races')(app);
 
 db.defaults({ horses: [], users: [], bets: [], races: [] })
   .write()
