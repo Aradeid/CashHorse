@@ -22,7 +22,7 @@
                     <% for(var i=0; i < horses.length; i++) { %>
                         <div class="list-item horse-list-item">
                             <img src="images/horses/<%= horses[i].image %>">
-                            <p class="horse-name"><%= horses[i].name %></p>
+                            <a class="horse-name" href="/horses/<%= horses[i].id %>"><%= horses[i].name %></a>
                             <p class="horse-power"><%= horses[i].power %></p>
                             <p class="horse-breed"><%= horses[i].breed %></p>
                         </div>
@@ -47,17 +47,17 @@
                         <form id="editForm" method="POST">
                             <div class="form-group">
                                 <label for="horseName">Name</label>
-                                <input class="form-control" name="horseName" id="horseName">
+                                <input class="form-control" name="horseName" id="horseName" required>
                             </div>
         
                             <div class="form-group">
                                 <label for="horsePower">Power</label>
-                                <input class="form-control" type="number" name="horsePower" id="horsePower">
+                                <input class="form-control" type="number" name="horsePower" id="horsePower" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="horseBreed">Power</label>
-                                <input class="form-control" name="horseBreed" id="horseBreed">
+                                <label for="horseBreed">Breed</label>
+                                <input class="form-control" name="horseBreed" id="horseBreed" required>
                             </div>
         
                             <button type="submit" class="btn btn-primary">Submit</button>

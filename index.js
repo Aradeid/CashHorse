@@ -2,23 +2,26 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-//TODO get data from DB
-let horses = []
-let bets = []
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
 
+const adapter = new FileSync('db.json')
+const db = low(adapter)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public'))
 
 app.set('view engine', 'ejs');
 require('./controllers/horses')(app);
 
-app.storage = [];
-app.storage.horses = [];
+db.defaults({ horses: [], users: [], bets: [], races: [] })
+  .write()
+
+app.storage = db;
 
 // index page
 app.get('/', function(req, res) {
-    console.log(app);
     res.render('pages/index');
 });
   

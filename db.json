@@ -1,0 +1,31 @@
+{
+  "horses": [
+    {
+      "id": 0,
+      "name": "Acer",
+      "power": "200",
+      "breed": "Coolio"
+    },
+    {
+      "id": 3,
+      "name": "John",
+      "power": "100",
+      "breed": "Illusory"
+    },
+    {
+      "name": "Stan",
+      "power": "",
+      "breed": "man",
+      "id": 4
+    },
+    {
+      "name": "Stan",
+      "power": "",
+      "breed": "man",
+      "id": 5
+    }
+  ],
+  "users": [],
+  "bets": [],
+  "races": []
+}
