@@ -6,7 +6,7 @@ module.exports = function(app){
     });
 
     app.get('/bets', (req, res) => {
-        // horses = db.getBets()
+        bets = db.getBets()
         res.render('pages/bets', {bets: bets})
     });
 
@@ -16,5 +16,16 @@ module.exports = function(app){
         res.render('pages/bet', {bet: bet});
       });
 
+    app.get('/api/bets/:id', function(req, res) {
+        var id = parseInt(req.params.id);
+        var bet = app.storage.get("bets").find({"id": id}).value();
+        if (!bet) {
+            res.sendStatus(404);
+            return;
+        }
+        //return bet;
+        res.end(JSON.stringify(bet));
+        //res.json(bet)
+    })
     //other routes..
 }

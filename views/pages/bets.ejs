@@ -12,19 +12,22 @@
     </header>
 
     <main>
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="jumbotron">
-                    <h1>This is great</h1>
-                    <p>Welcome to templating using EJS</p>
+        <div class="container">
+            <% if (bets && bets.length > 0) { %>
+                <div class="item-list bet-list">
+                    <% for(var i=0; i < bets.length; i++) { %>
+                        <div class="list-item bet-list-item">
+                            <p class="bet-status"><%= bet[i].status %></p> <!-- replace with image at some point -->
+                            <p class="bet-value"><%= bet[i].value %></p>
+                            <p class="bet-win"><%= bet[i].win %></p>
+                            <p class="bet-horse"><%= bet[i].horse %></p>
+                            <p class="bet-race"><%= bet[i].race %></p>
+                        </div>
+                    <% } %>
                 </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="well">
-                    <h3>Look I'm A Sidebar!</h3>
-                </div>
-            </div>
+            <% } else { %>
+                <p class="empty-list">No bets have been added yet. Head for the races to place a bet <a href="/races">HERE!</a></p>
+            <% } %>
         </div>
     </main>
 
