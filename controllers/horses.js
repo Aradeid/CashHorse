@@ -36,7 +36,13 @@ module.exports = function(app){
         }
         res.render('pages/horse', {horse: horse});
       });
-    app.delete('/horses/:id', function(req, res){
+    
+    app.get('/api/horses', (req, res) => {
+        horses = app.storage.get("horses").value();
+        res.end(JSON.stringify(horses));
+    });
+
+    app.delete('/api/horses/:id', function(req, res){
         var id = req.params.id;
         app.storage.get('horses').remove((h) => h.id == id).write();
         res.redirect(200, '/horses');
