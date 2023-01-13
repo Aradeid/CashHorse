@@ -24,7 +24,7 @@ module.exports = function(app){
         app.storage.get('races').push(race).write();
     
         console.log('New race added successfully', race);
-        res.redirect(200, '/races');
+        res.redirect('/races');
     });
 
     app.get('/races', (req, res) => {

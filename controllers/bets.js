@@ -1,13 +1,13 @@
 module.exports = function(app){
 
     app.post('/bets', (req, res) => {
-        //TODO verify authentication
+        //TODO verify authentication, verify affordability
         // We will be coding here
     });
 
     app.get('/bets', (req, res) => {
-        bets = db.getBets()
-        res.render('pages/bets', {bets: bets})
+        bets = db.getBets();
+        res.render('pages/bets', {bets: bets});
     });
 
     app.get('/bets/:id', function(req, res) {
@@ -26,6 +26,11 @@ module.exports = function(app){
         //return bet;
         res.end(JSON.stringify(bet));
         //res.json(bet)
-    })
+    });
+
+    app.get('/api/bets', (req, res) => {
+        bets = db.getBets();
+        res.end(JSON.stringify(bets));
+    });
     //other routes..
 }

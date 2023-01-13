@@ -1,6 +1,6 @@
 module.exports = function(app){
 
-    app.post('/horses', (req, res) => {
+    app.post('/api/horses', (req, res) => {
         let horse = {};
         horse.name = req.body.horseName;
         horse.power = req.body.horsePower;
@@ -19,7 +19,7 @@ module.exports = function(app){
         app.storage.get('horses').push(horse).write();
     
         console.log('New horse added successfully', horse);
-        res.redirect(200, '/horses');
+        res.redirect('/horses');
     });
     
     app.get('/horses', (req, res) => {
@@ -45,6 +45,6 @@ module.exports = function(app){
     app.delete('/api/horses/:id', function(req, res){
         var id = req.params.id;
         app.storage.get('horses').remove((h) => h.id == id).write();
-        res.redirect(200, '/horses');
+        res.redirect('/horses');
     })
 }
