@@ -10,6 +10,10 @@
     <header>
         <%- include('../partials/header'); %>
     </header>
+    <% if (!loggedin) { %>
+        <%- include('../partials/login'); %>
+        <%- include('../partials/register'); %>
+    <% } %>
 
     <main>
         <div class="jumbotron">

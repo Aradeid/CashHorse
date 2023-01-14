@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+const bcrypt = require("bcrypt")
 const app = express();
 const port = 3000;
 
@@ -12,10 +14,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'))
 
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
+
 app.set('view engine', 'ejs');
 require('./controllers/horses')(app);
 require('./controllers/races')(app);
-require('./controllers/races')(app);
+require('./controllers/bets')(app);
+require('./controllers/users')(app);
 
 db.defaults({ horses: [], users: [], bets: [], races: [], indexes: [] })
     .write()
@@ -32,9 +41,11 @@ db.getIndexFor = (name) => {
 
 app.storage = db;
 
+app.hasher = bcrypt;
+
 // index page
 app.get('/', function(req, res) {
-    res.render('pages/index');
+    res.render('pages/index', {loggedin: req.session.loggedin});
 });
   
   // about page

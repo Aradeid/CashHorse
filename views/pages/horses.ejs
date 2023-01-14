@@ -13,10 +13,11 @@
 
     <main>
         <div class="container">
-            
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHorseModal">
-                Add horse
-            </button>
+            <% if (allowAddingHorses) { %>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHorseModal">
+                    Add horse
+                </button>
+            <% } %>
             <div class="item-list horse-list" id="horse-list">
                 
             </div>

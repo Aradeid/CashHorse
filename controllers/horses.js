@@ -18,8 +18,12 @@ module.exports = function(app){
     });
     
     app.get('/horses', (req, res) => {
+        var allowAddingHorses = false;
+        if (req.session.loggedin) {
+            allowAddingHorses = true;
+        }
         horses = app.storage.get("horses").value();
-        res.render('pages/horses', {horses: horses})
+        res.render('pages/horses', {horses: horses, allowAddingHorses: allowAddingHorses})
     });
 
     app.get('/horses/:id', function(req, res) {
