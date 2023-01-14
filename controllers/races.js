@@ -13,14 +13,7 @@ module.exports = function(app){
             }
         }
 
-        var len = app.storage.get('races').value().length;
-        if (len == 0) {
-            race.id = 0;
-        } else {
-            race.id = app.storage.get('races').value()[len-1].id + 1;
-        }
-        console.log(race);
-        console.log(req.body);
+        race.id = app.storage.getIndexFor("races");;
         app.storage.get('races').push(race).write();
     
         console.log('New race added successfully', race);

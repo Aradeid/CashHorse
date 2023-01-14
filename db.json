@@ -23,6 +23,96 @@
       "power": "",
       "breed": "man",
       "id": 5
+    },
+    {
+      "name": "Johnny",
+      "power": "50",
+      "breed": "Bravo",
+      "id": 6
+    },
+    {
+      "name": "GoodName",
+      "power": "50",
+      "breed": "GoodBreed",
+      "id": 7
+    },
+    {
+      "name": "a",
+      "power": "20",
+      "breed": "b",
+      "id": 8
+    },
+    {
+      "name": "Slade",
+      "power": "50",
+      "breed": "goat",
+      "id": 9
+    },
+    {
+      "name": "Stan",
+      "power": "100",
+      "breed": "Lee",
+      "id": 10
+    },
+    {
+      "name": "Santa",
+      "power": "80",
+      "breed": "Deer",
+      "id": 11
+    },
+    {
+      "name": "Himeno",
+      "power": "200",
+      "breed": "Steed",
+      "id": 12
+    },
+    {
+      "name": "Spam",
+      "power": "70",
+      "breed": "pig",
+      "id": 13
+    },
+    {
+      "name": "TestBot",
+      "power": "4",
+      "breed": "RoboHorse",
+      "id": 14
+    },
+    {
+      "name": "Tentacle",
+      "power": "500",
+      "breed": "Eldrich Horror",
+      "id": 15
+    },
+    {
+      "name": "League",
+      "power": "300",
+      "breed": "Gamer",
+      "id": 17
+    },
+    {
+      "name": "Lucky #18",
+      "power": "13",
+      "breed": "Gamer",
+      "id": 19
+    },
+    {
+      "name": "a",
+      "power": "2",
+      "breed": "a",
+      "id": 22
+    },
+    {
+      "name": "Finale",
+      "power": "40",
+      "breed": "man",
+      "id": 25
+    },
+    {
+      "name": "ActualFinale",
+      "power": "60",
+      "breed": "man",
+      "id": 26
     }
   ],
   "users": [],
@@ -44,6 +134,25 @@
         0
       ],
       "id": 1
+    },
+    {
+      "time": "2022-12-25T23:13",
+      "description": "the john fight",
+      "horses": [
+        3,
+        6
+      ],
+      "id": 2
+    }
+  ],
+  "indexes": [
+    {
+      "table": "horses",
+      "index": 26
+    },
+    {
+      "table": "races",
+      "index": 2
     }
   ]
 }

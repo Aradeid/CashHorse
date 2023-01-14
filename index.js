@@ -17,8 +17,18 @@ require('./controllers/horses')(app);
 require('./controllers/races')(app);
 require('./controllers/races')(app);
 
-db.defaults({ horses: [], users: [], bets: [], races: [] })
-  .write()
+db.defaults({ horses: [], users: [], bets: [], races: [], indexes: [] })
+    .write()
+
+db.getIndexFor = (name) => {
+    var entry = db.get('indexes').find({"table": name}).value();
+    if (!entry) {
+        db.get('indexes').push({"table": name, "index": 0}).write();
+        return 0;
+    }
+    db.get('indexes').find({"table": name}).assign({"index": entry.index+1}).value();
+    return entry.index;
+}
 
 app.storage = db;
 

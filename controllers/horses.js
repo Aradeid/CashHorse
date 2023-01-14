@@ -10,12 +10,7 @@ module.exports = function(app){
         if (!horse.name || !horse.power || !horse.breed) {
             //TODO throw error
         }
-        var len = app.storage.get('horses').value().length;
-        if (len == 0) {
-            horse.id = 0;
-        } else {
-            horse.id = app.storage.get('horses').value()[len-1].id + 1;
-        }
+        horse.id = app.storage.getIndexFor("horses");
         app.storage.get('horses').push(horse).write();
     
         console.log('New horse added successfully', horse);
