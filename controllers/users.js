@@ -44,6 +44,7 @@ module.exports = function(app){
         user.username = username;
         user.password = hash;
         user.role = "user";
+        user.balance = 1000;
         user.index = app.storage.getIndexFor("users");
         app.storage.get('users').push(user).write();
         req.session.loggedin = true;
