@@ -1,14 +1,32 @@
-<div class="login">
-    <h1>Login</h1>
-    <form action="/authenticate" method="post">
-        <label for="username">
-            <i class="fas fa-user"></i>
-        </label>
-        <input type="text" name="username" placeholder="Username" id="username" required>
-        <label for="password">
-            <i class="fas fa-lock"></i>
-        </label>
-        <input type="password" name="password" placeholder="Password" id="password" required>
-        <input type="submit" value="Login">
-    </form>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+    Login
+</button>
+
+<div id="loginModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login</h5>
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <form action="/api/users/login" method="post">
+                <div class="form-group">
+                    
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                    </label>
+                    <input class="form-control" type="text" name="username" placeholder="Username" id="username" required>
+                </div>
+                <div class="form-group">
+
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                    </label>
+                    <input class="form-control" type="password" name="password" placeholder="Password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
 </div>

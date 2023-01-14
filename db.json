@@ -116,7 +116,13 @@
     }
   ],
   "users": [
-    []
+    {
+      "username": "Mihail",
+      "password": "$2b$10$.ugCm4bsMvMI84nzDNAq1ujT4WhTvXQ22sbc8scxkYsktfyHOk9V6",
+      "role": "user",
+      "balance": 1000,
+      "index": 9
+    }
   ],
   "bets": [],
   "races": [
@@ -158,7 +164,7 @@
     },
     {
       "table": "users",
-      "index": 0
+      "index": 9
     }
   ]
 }

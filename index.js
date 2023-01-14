@@ -43,9 +43,19 @@ app.storage = db;
 
 app.hasher = bcrypt;
 
+//make sure login functions correctly
+function checkLoggedIn(req, res, next) {
+	res.locals.loggedin = req.session.loggedin;
+	if (req.session.loggedin) {
+		res.locals.username = req.session.username;
+	}
+}
+
+// app.use(checkLoggedIn);
+
 // index page
 app.get('/', function(req, res) {
-    res.render('pages/index', {loggedin: req.session.loggedin});
+    res.render('pages/index', {username: req.session.username, loggedin: req.session.loggedin});
 });
   
   // about page
