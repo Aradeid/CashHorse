@@ -3,7 +3,7 @@
     {
       "id": 0,
       "name": "Acer",
-      "power": "200",
+      "power": "68",
       "breed": "Coolio"
     },
     {
@@ -14,13 +14,13 @@
     },
     {
       "name": "Stan",
-      "power": "",
+      "power": "33",
       "breed": "man",
       "id": 4
     },
     {
       "name": "Stan",
-      "power": "",
+      "power": "48",
       "breed": "man",
       "id": 5
     },
@@ -80,13 +80,13 @@
     },
     {
       "name": "Tentacle",
-      "power": "500",
+      "power": "50",
       "breed": "Eldrich Horror",
       "id": 15
     },
     {
       "name": "League",
-      "power": "300",
+      "power": "37",
       "breed": "Gamer",
       "id": 17
     },
@@ -137,18 +137,8 @@
       "time": "2022-12-15T21:59",
       "description": "cool race",
       "horses": [
-        {
-          "id": 0,
-          "name": "Acer",
-          "power": "200",
-          "breed": "Coolio"
-        },
-        {
-          "name": "Stan",
-          "power": "",
-          "breed": "man",
-          "id": 5
-        }
+        0,
+        5
       ],
       "id": 0,
       "status": "pending"
@@ -171,6 +161,28 @@
       ],
       "id": 2,
       "status": "pending"
+    },
+    {
+      "time": "2023-01-26T00:01",
+      "description": "the one that actually has stakes",
+      "status": "pending",
+      "horses": [
+        4,
+        5,
+        6,
+        13,
+        14,
+        26
+      ],
+      "mods": [
+        -0.17,
+        0.11,
+        0.09,
+        0.32,
+        -0.01,
+        0
+      ],
+      "id": 3
     }
   ],
   "indexes": [
@@ -180,7 +192,7 @@
     },
     {
       "table": "races",
-      "index": 2
+      "index": 3
     },
     {
       "table": "users",

@@ -49,8 +49,8 @@ module.exports = function(app) {
             res.sendStatus(404);
             return;
         }
-        //race.horses = app.storage.get("horses").filter((horse) => race.horses.includes(horse.id)).value();
-        res.send(race);
+        horses = app.storage.get("horses").filter((horse) => race.horses.includes(horse.id)).value();
+        res.send({race: race, horses:horses });
       });
 
     app.get('/api/races/:id/execute', function(req, res) {

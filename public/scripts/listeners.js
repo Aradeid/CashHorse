@@ -107,21 +107,21 @@ const getRace = (id) => {
             throw new Error(`HTTP error: ${res.status}`);
         }
         return res.json();
-    }).then((race) => {
+    }).then((data) => {
         parentDiv = document.createElement('div');
         parentDiv.classList.add('race-data');
         pTime = document.createElement('p');
-        pTime.innerHTML = race.time;
+        pTime.innerHTML = data.race.time;
         parentDiv.appendChild(pTime);
         pDesc = document.createElement('p');
-        pDesc.innerHTML = race.description;
+        pDesc.innerHTML = data.race.description;
         parentDiv.appendChild(pDesc);
         subDiv = document.createElement('div');
         subDiv.classList.add("race-horses");
         
         parentSelect = document.getElementsByClassName("horse-bet-select")[0];
-
-        for (let horse of race.horses) {
+        for (let horse of data.horses) {
+            console.log(horse);
             horseDiv = document.createElement('div');
             horseDiv.classList.add("horse-list-item");
             horseDiv.classList.add("list-item");
