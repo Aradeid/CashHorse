@@ -33,6 +33,11 @@ module.exports = function(app) {
         res.render('pages/races', {isAdmin: isAdmin})
     });
 
+    app.get('/api/races/', function(req, res) {
+        races = app.storage.get("races").value();
+        res.send(races);
+      });
+
     app.get('/api/races/:id', function(req, res) {
         var id = parseInt(req.params.id);
         var race = app.storage.get("races").find({"id": id}).value();
@@ -58,7 +63,7 @@ module.exports = function(app) {
         }
         race = app.storage.get('races').find({"id": id}).assign({"status": "finished"}).value();
         raceHorses = [];
-        for (let idx in race.horses) {
+        for (let idx of  race.horses) {
             horse = app.storage.get('horses').find({"id": race.horses[idx]}).value();
             pow = (race.mods ? race.mods[idx] : 1)*horse.power;
             raceHorses.push([horse.id, pow, 2000]);
@@ -68,7 +73,7 @@ module.exports = function(app) {
         offset = 0;
         finishReached = false;
         while (finishReached)
-            for (let ds in raceHorses) {
+            for (let ds of raceHorses) {
                 ds[2] -= (Math.floor(Math.random() * 30 - 15) /100 * ds[1]) //a random power sway up to 15% in any direction every tick
                 
                 if (ds[2] <= 0) {
@@ -81,27 +86,24 @@ module.exports = function(app) {
             }
 
         //boring and inefficient sorting function
-        for (let h in raceHorses) {
+        for (let h of raceHorses) {
             //adjust offset
             ds[2] += offset
         }
 
         sortedHorses = Array.from(raceHorses);
         sortedHorses.sort((a,b) => a[2] - b[2]);
-        for (h in raceHorses) {
+        for (h of raceHorses) {
             h[3] = sortedHorses.indexOf(h) + 1;
         }
         ranks = []
         scores = []
-        for (h in raceHorses) {
+        for (h of raceHorses) {
             ranks.push(h[3]);
             scores.push([h[2]]);
             if (h[3] == 1) {
                 bets = app.storage.get('bets').find({"race": id, "horse": h[0]}).assign({"status": "won"}).value();
-                if (bets.assign) {
-                    continue;
-                }
-                for (let bet in bets) {
+                for (let bet of bets) {
                     //pay out the winners
                     user = app.storage.get('users').find({"id": bet.user}).value();
                     app.storage.get('users').find({"id": bet.user}).assign({"balance": user.balance + bet.won});
@@ -134,10 +136,7 @@ module.exports = function(app) {
         console.log(ra);
         bets = app.storage.get('bets').find({"race": id}).assign({"status": "cancelled"}).value();
         console.log(bets);
-        if (bets.assign) {
-            res.send(race);
-        }
-        for (let bet in bets) {
+        for (let bet of bets) {
             //refund all participants
             console.log(bet);
             user = app.storage.get('users').find({"id": bet.user}).value();

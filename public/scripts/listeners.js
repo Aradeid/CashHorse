@@ -73,7 +73,8 @@ const getRaces = () => {
         }
         return res.json();
     }).then((data) => {
-        for (let horse in data) {
+        console.log(data[0]);
+        for (let race of data) {
 
             a = document.createElement('a');
             a.classList.add('list-item');
@@ -83,7 +84,7 @@ const getRaces = () => {
                 <p class="race-description">${race.description}</p>
                 <p class="race-breed">${race.breed}</p>
             `
-            document.getElementsByTagName('race-list')[0].appendChild(a);
+            document.getElementsByClassName('race-list')[0].appendChild(a);
         }
         if (data && data.length > 0) {
             hideEmptyList()
@@ -118,8 +119,10 @@ const getRace = (id) => {
         parentDiv.appendChild(pDesc);
         subDiv = document.createElement('div');
         subDiv.classList.add("race-horses");
-        //subDiv.appendChild(?);
-        for (let horse in race.horse) {
+        
+        parentSelect = document.getElementsByClassName("horse-bet-select")[0];
+
+        for (let horse of race.horse) {
             horseDiv = document.createElement('div');
             horseDiv.classList.add("horse-list-item");
             horseDiv.classList.add("list-item");
@@ -132,6 +135,12 @@ const getRace = (id) => {
                 <p class="horse-breed">${horse.breed}</p>
             `
             subDiv.appendChild(horseDiv);
+
+            option = document.createElement("option");
+            option.value = horse.id;
+            option.innerHTML = horse.name;
+
+            parentSelect.appendChild(option);
         }
         parentDiv.appendChild(subDiv);
         document.getElementsByClassName('race-container')[0].appendChild(parentDiv);
@@ -153,11 +162,11 @@ const buildHorseCheckboxes = () => {
             input = document.createElement("input");
             input.classList.add('form-check-input');
             input.name = 'raceHorse' + horse.id;
-            input.id = parentInput.name;
+            input.id = input.name;
 
             parentLabel = document.createElement('label');
             parentLabel.classList.add('form-check-label');
-            parentLabel.for = parentInput.name;
+            parentLabel.for = input.name;
 
             parentLabel.innerHTML = `
                 <img src="images/horses/${horse.image}">

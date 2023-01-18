@@ -54,7 +54,7 @@ module.exports = function(app){
         horseIncluded = false;
         horseTotal = 0;
         horseIndividual = 0;
-        for (let h in race.horses) {
+        for (let h of race.horses) {
             horse = app.storage.get('horses').find({"id": h.id}).value()
             horseTotal = parseInt(horse.power);
             if (horse.id == parseInt(req.body.horse)) {

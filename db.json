@@ -121,7 +121,14 @@
       "password": "$2b$10$.ugCm4bsMvMI84nzDNAq1ujT4WhTvXQ22sbc8scxkYsktfyHOk9V6",
       "role": "admin",
       "balance": 1000,
-      "index": 9
+      "id": 9
+    },
+    {
+      "username": "o",
+      "password": "$2b$10$.pFiq33/zSw/Vb1aLatsp.YTmxqcsjwU392b3Pr2.6Rq347njuwEG",
+      "role": "user",
+      "balance": 1000,
+      "id": 10
     }
   ],
   "bets": [],
@@ -130,8 +137,18 @@
       "time": "2022-12-15T21:59",
       "description": "cool race",
       "horses": [
-        0,
-        5
+        {
+          "id": 0,
+          "name": "Acer",
+          "power": "200",
+          "breed": "Coolio"
+        },
+        {
+          "name": "Stan",
+          "power": "",
+          "breed": "man",
+          "id": 5
+        }
       ],
       "id": 0,
       "status": "pending"
@@ -167,7 +184,7 @@
     },
     {
       "table": "users",
-      "index": 9
+      "index": 10
     }
   ]
 }

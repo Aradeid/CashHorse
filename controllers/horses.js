@@ -29,7 +29,7 @@ module.exports = function(app){
             allowAddingHorses = true;
         }
         horses = app.storage.get("horses").value();
-        var user = app.storage.get("users").find({"id": res.locals.userid}).value();
+        var user = app.storage.get("users").find({"id": req.session.userid}).value();
         isAdmin = user && user.role == "admin";
         res.render('pages/horses', {isAdmin: isAdmin})
     });

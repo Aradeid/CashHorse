@@ -15,7 +15,7 @@ module.exports = function(app){
                     req.session.username = username;
                     req.session.userid = parseInt(user.id);
                     req.session.userbalance = parseInt(user.balance);
-                    res.redirect('/horses');
+                    res.redirect('/');
                     return;
                 }
                 res.send('Incorrect Username or Password!');
@@ -48,11 +48,11 @@ module.exports = function(app){
             user.password = hash;
             user.role = "user";
             user.balance = 1000;
-            user.index = app.storage.getIndexFor("users");
+            user.id = app.storage.getIndexFor("users");
             app.storage.get('users').push(user).write();
             req.session.loggedin = true;
             req.session.username = username;
-            req.session.userid = parseInt(user.index);
+            req.session.userid = parseInt(user.id);
             req.session.userbalance = parseInt(user.balance);
             res.redirect('/');
             return;
