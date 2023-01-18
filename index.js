@@ -21,10 +21,6 @@ app.use(session({
 }));
 
 app.set('view engine', 'ejs');
-require('./controllers/horses')(app);
-require('./controllers/races')(app);
-require('./controllers/bets')(app);
-require('./controllers/users')(app);
 
 db.defaults({ horses: [], users: [], bets: [], races: [], indexes: [] })
     .write()
@@ -43,22 +39,23 @@ app.storage = db;
 
 app.hasher = bcrypt;
 
-//make sure login functions correctly
+//assigns user role if logged in
 function checkLoggedIn(req, res, next) {
 	res.locals.loggedin = req.session.loggedin;
 	if (req.session.loggedin) {
 		res.locals.username = req.session.username;
 	}
+    next()//route or no params?
 }
 
-// app.use(checkLoggedIn);
+app.all('*', checkLoggedIn);//apply to all pages
 
 // index page
 app.get('/', function(req, res) {
-    res.render('pages/index', {username: req.session.username, loggedin: req.session.loggedin});
+    res.render('pages/index');
 });
   
-  // about page
+// about page
 app.get('/about', function(req, res) {
     res.render('pages/about');
 });
@@ -66,5 +63,10 @@ app.get('/about', function(req, res) {
 app.post('/users', (req, res) => {
     //show own bets by default and all bets with admin rights
 });
+
+require('./controllers/horses')(app);
+require('./controllers/races')(app);
+require('./controllers/bets')(app);
+require('./controllers/users')(app);
 
 app.listen(port, () => console.log(`App listening on port ${port}!`))

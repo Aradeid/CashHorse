@@ -13,5 +13,9 @@
         <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
         </li>
+        
+        <% if (loggedin) { %>
+            <%- include('./userMenu'); %>
+        <% } %>
     </ul>
 </nav>
