@@ -120,7 +120,7 @@
       "username": "Mihail",
       "password": "$2b$10$.ugCm4bsMvMI84nzDNAq1ujT4WhTvXQ22sbc8scxkYsktfyHOk9V6",
       "role": "admin",
-      "balance": 920,
+      "balance": null,
       "id": 9
     },
     {
@@ -170,7 +170,7 @@
       "horse": 0,
       "value": 80,
       "win": 80,
-      "status": "pending"
+      "status": "won"
     }
   ],
   "races": [
@@ -182,7 +182,7 @@
         5
       ],
       "id": 0,
-      "status": "pending"
+      "status": "finished"
     },
     {
       "time": "2023-01-07T07:08",
@@ -191,7 +191,15 @@
         0
       ],
       "id": 1,
-      "status": "pending"
+      "status": "finished",
+      "scores": [
+        [
+          2000
+        ]
+      ],
+      "ranks": [
+        1
+      ]
     },
     {
       "time": "2022-12-25T23:13",

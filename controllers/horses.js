@@ -8,7 +8,7 @@ module.exports = function(app){
         }
         let horse = {};
         horse.name = req.body.horseName;
-        horse.power = req.body.horsePower;
+        horse.power = parseInt(req.body.horsePower);
         horse.image = req.body.horseImage;
         horse.breed = req.body.horseBreed;
 

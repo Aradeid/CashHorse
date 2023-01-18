@@ -22,8 +22,8 @@ module.exports = function(app) {
                 race.horses.push(hKey);
                 race.mods.push(Math.floor(Math.random() * 60 - 20) /100)
                 horse = app.storage.get("horses").find({"id": hKey}).value();
-                rates[hKey] = horse.power;
-                hTotal += horse.power;
+                rates[hKey] = parseInt(horse.power);
+                hTotal += parseInt(horse.power);
             }
         }
 
@@ -88,7 +88,7 @@ module.exports = function(app) {
         raceHorses = [];
         for (let idx of  race.horses) {
             horse = app.storage.get('horses').find({"id": race.horses[idx]}).value();
-            pow = (race.mods ? race.mods[idx] : 1)*horse.power;
+            pow = (race.mods ? race.mods[idx] : 1)*parseInt(horse.power);
             raceHorses.push([horse.id, pow, 2000]);
         }
 
