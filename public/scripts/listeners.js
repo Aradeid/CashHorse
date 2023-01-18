@@ -73,7 +73,6 @@ const getRaces = () => {
         }
         return res.json();
     }).then((data) => {
-        console.log(data[0]);
         for (let race of data) {
 
             a = document.createElement('a');
@@ -164,6 +163,7 @@ const buildHorseCheckboxes = () => {
             input = document.createElement("input");
             input.classList.add('form-check-input');
             input.name = 'raceHorse' + horse.id;
+            input.type = "checkbox";
             input.id = input.name;
 
             parentLabel = document.createElement('label');
