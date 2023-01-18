@@ -14,7 +14,9 @@
     <main>
         <div class="item-container horse-container"></div>
         <script>getHorse(<%= id %>)</script>
-        <button type="button" class="btn btn-danger" onclick="deleteHorse(<%= id %>)">Delete</button>
+        <% if (isAdmin) { %>
+            <button type="button" class="btn btn-danger" onclick="deleteHorse(<%= id %>)">Delete</button>
+        <% } %>
     </main>
 
     <footer>
