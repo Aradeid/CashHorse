@@ -132,6 +132,7 @@ const getRace = (id) => {
                 <img src="images/horses/${horse.image}">
                 <a class="horse-name" href="/horses/${horse.id}">${horse.name}</a>
                 <p class="horse-power">${horse.power}</p>
+                <p class="horse-win">${horse.win}</p>
                 <p class="horse-breed">${horse.breed}</p>
             `
 
@@ -233,6 +234,28 @@ const getBetForRace = (id) => {
             </button>
             `
         }
+    });
+}
+
+const executeRace = (id) => {
+    fetch('/api/races/' + id + '/execute').then((res) => {
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`);
+        }
+        return res.json();
+    }).then(() => {
+        location.reload()
+    });
+}
+
+const cancelRace = (id) => {
+    fetch('/api/races/' + id + '/cancel').then((res) => {
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`);
+        }
+        return res.json();
+    }).then(() => {
+        location.reload()
     });
 }
 

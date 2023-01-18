@@ -12,19 +12,30 @@ module.exports = function(app) {
         race.status = "pending"
         race.horses = [];
         race.mods = [];
+        race.wins = [];
+        rates = []
+        hTotal = 0;
         
         for (key in req.body) {
             if (key.includes("raceHorse")) {
-                race.horses.push(parseInt(key.slice(9)));
+                hKey = parseInt(key.slice(9));
+                race.horses.push(hKey);
                 race.mods.push(Math.floor(Math.random() * 60 - 20) /100)
+                horse = app.storage.get("horses").find({"id": hKey}).value();
+                rates[hKey] = horse.power;
+                hTotal += horse.power;
             }
+        }
+
+        for (h in race.horses) {
+            race.wins.push(Math.floor(hTotal/rates[h]*100)/100);
         }
 
         race.id = app.storage.getIndexFor("races");;
         app.storage.get('races').push(race).write();
     
         console.log('New race added successfully', race);
-        res.redirect('/races');
+        res.redirect('/races/'+race.id);
     });
 
     app.get('/races', (req, res) => {
