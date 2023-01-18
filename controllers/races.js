@@ -109,7 +109,7 @@ module.exports = function(app) {
             }
 
         //boring and inefficient sorting function
-        for (let h of raceHorses) {
+        for (let ds of raceHorses) {
             //adjust offset
             ds[2] += offset
         }
@@ -126,6 +126,9 @@ module.exports = function(app) {
             scores.push([h[2]]);
             if (h[3] == 1) {
                 bets = app.storage.get('bets').find({"race": id, "horse": h[0]}).assign({"status": "won"}).value();
+                if (bets && !Array.isArray(bets)) {
+                    bets = [bets];
+                }
                 for (let bet of bets) {
                     //pay out the winners
                     user = app.storage.get('users').find({"id": bet.user}).value();
@@ -154,14 +157,13 @@ module.exports = function(app) {
             res.sendStatus(404);
             return;
         }
-        console.log("race checked");
         ra = app.storage.get('races').find({"id": id}).assign({"status": "cancelled"}).value();
-        console.log(ra);
         bets = app.storage.get('bets').find({"race": id}).assign({"status": "cancelled"}).value();
-        console.log(bets);
+        if (bets && !Array.isArray(bets)) {
+            bets = [bets];
+        }
         for (let bet of bets) {
             //refund all participants
-            console.log(bet);
             user = app.storage.get('users').find({"id": bet.user}).value();
             app.storage.get('users').find({"id": bet.user}).assign({"balance": user.balance + bet.value});
         }

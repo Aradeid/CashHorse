@@ -19,8 +19,8 @@
 
     <main>
         <% if (isAdmin && racePending) { %>
-            <button type="button" class="btn btn-primary" id="execute-btn">Execute</button>
-            <button type="button" class="btn btn-primary" id="cancel-btn">Cancel</button>
+            <button type="button" class="btn btn-primary" id="execute-btn" onclick="executeRace(<%=id%>)">Execute</button>
+            <button type="button" class="btn btn-primary" id="cancel-btn" onclick="cancelRace(<%=id%>)">Cancel</button>
         <% } %>
         <div class="race-container"></div>
     </main>
