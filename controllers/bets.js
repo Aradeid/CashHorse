@@ -32,8 +32,8 @@ module.exports = function(app){
             res.sendStatus(403);
             return;
         }
-        bets = app.storage.get("bets").find({"user": res.locals.userid, "race": parseInt(req.params.id)});
-        res.end(JSON.stringify(bets));
+        bet = app.storage.get("bets").find({"user": res.locals.userid, "race": parseInt(req.params.id)});
+        res.end(JSON.stringify(bet));
     });
 
     app.post('/api/bets', (req, res) => {
@@ -42,12 +42,17 @@ module.exports = function(app){
             return;
         }
         //check balance can afford
-        if (!app.storage.get('horses').find({"id": parseInt(req.body.horse)}).value()) {
+        if (!app.storage.get('horses').find({"id": parseInt(req.body.horseId)}).value()) {
             res.sendStatus(400);
             return;
         }
-        race = app.storage.get('races').find({"id": parseInt(req.body.race)}).value();
+        race = app.storage.get('races').find({"id": parseInt(req.body.raceId)}).value();
         if (!race || race.status != "pending") {
+            res.sendStatus(400);
+            return;
+        }
+        oldBet = app.storage.get('bets').find({"user": res.locals.userid, "race": parseInt(req.body.raceId)}).value();
+        if (oldBet) {
             res.sendStatus(400);
             return;
         }
@@ -55,9 +60,9 @@ module.exports = function(app){
         horseTotal = 0;
         horseIndividual = 0;
         for (let h of race.horses) {
-            horse = app.storage.get('horses').find({"id": h.id}).value()
-            horseTotal = parseInt(horse.power);
-            if (horse.id == parseInt(req.body.horse)) {
+            horse = app.storage.get('horses').find({"id": h}).value()
+            horseTotal += parseInt(horse.power);
+            if (horse.id == parseInt(req.body.horseId)) {
                 horseIncluded = true;
                 horseIndividual = horse.power;
             }
@@ -69,15 +74,16 @@ module.exports = function(app){
         
         bet = {};
         bet.user = res.locals.userid;
-        bet.race = req.body.race;
-        bet.horse = req.body.horse;
-        bet.value = req.body.value;
+        bet.race = parseInt(req.body.raceId);
+        bet.horse = parseInt(req.body.horseId);
+        bet.value = parseInt(req.body.betValue);
         ratio = horseTotal / horseIndividual;
         bet.win = Math.floor(bet.value * ratio);
         bet.status = "pending";
         app.storage.get('bets').push(bet).write();
-        app.storage.get('users').find({"id": bet.user}).assign({"balance": res.locals.userbalance - bet.value}).value();
+        app.storage.get('users').find({"id": res.locals.userid}).assign({"balance": res.locals.userbalance - bet.value}).write();
         res.locals.userbalance -= bet.value;
-        res.send(bet);
+        // res.send(bet);
+        res.redirect('/races/'+req.body.raceId);
     });
 }
