@@ -4,115 +4,134 @@
       "id": 0,
       "name": "Acer",
       "power": "68",
-      "breed": "Coolio"
+      "breed": "Coolio",
+      "image": "horse-1.jpg"
     },
     {
       "id": 3,
       "name": "John",
       "power": "100",
-      "breed": "Illusory"
+      "breed": "Illusory",
+      "image": "horse-2.jpg"
     },
     {
       "name": "Stan",
       "power": "33",
       "breed": "man",
-      "id": 4
+      "id": 4,
+      "image": "horse-3.jpg"
     },
     {
       "name": "Stan",
       "power": "48",
       "breed": "man",
-      "id": 5
+      "id": 5,
+      "image": "horse-4.jpg"
     },
     {
       "name": "Johnny",
       "power": "50",
       "breed": "Bravo",
-      "id": 6
+      "id": 6,
+      "image": "horse-5.jpg"
     },
     {
       "name": "GoodName",
       "power": "50",
       "breed": "GoodBreed",
-      "id": 7
+      "id": 7,
+      "image": "horse-6.jpg"
     },
     {
       "name": "a",
       "power": "20",
       "breed": "b",
-      "id": 8
+      "id": 8,
+      "image": "horse-7.jpg"
     },
     {
       "name": "Slade",
       "power": "50",
       "breed": "goat",
-      "id": 9
+      "id": 9,
+      "image": "horse-8.jpg"
     },
     {
       "name": "Stan",
       "power": "100",
       "breed": "Lee",
-      "id": 10
+      "id": 10,
+      "image": "horse-9.jpg"
     },
     {
       "name": "Santa",
       "power": "80",
       "breed": "Deer",
-      "id": 11
+      "id": 11,
+      "image": "horse-10.jpg"
     },
     {
       "name": "Himeno",
       "power": "200",
       "breed": "Steed",
-      "id": 12
+      "id": 12,
+      "image": "horse-11.jpg"
     },
     {
       "name": "Spam",
       "power": "70",
       "breed": "pig",
-      "id": 13
+      "id": 13,
+      "image": "horse-12.jpg"
     },
     {
       "name": "TestBot",
       "power": "4",
       "breed": "RoboHorse",
-      "id": 14
+      "id": 14,
+      "image": "horse-13.jpg"
     },
     {
       "name": "Tentacle",
       "power": "50",
       "breed": "Eldrich Horror",
-      "id": 15
+      "id": 15,
+      "image": "horse-14.jpg"
     },
     {
       "name": "League",
       "power": "37",
       "breed": "Gamer",
-      "id": 17
+      "id": 17,
+      "image": "horse-15.jpg"
     },
     {
       "name": "Lucky #18",
       "power": "13",
       "breed": "Gamer",
-      "id": 19
+      "id": 19,
+      "image": "horse-16.jpg"
     },
     {
       "name": "a",
       "power": "2",
       "breed": "a",
-      "id": 22
+      "id": 22,
+      "image": "horse-17.jpg"
     },
     {
       "name": "Finale",
       "power": "40",
       "breed": "man",
-      "id": 25
+      "id": 25,
+      "image": "horse-18.jpg"
     },
     {
       "name": "ActualFinale",
       "power": "60",
       "breed": "man",
-      "id": 26
+      "id": 26,
+      "image": "horse-19.jpg"
     }
   ],
   "users": [
