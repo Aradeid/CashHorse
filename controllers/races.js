@@ -121,6 +121,7 @@ module.exports = function(app) {
         }
         ranks = []
         scores = []
+        bets = app.storage.get('bets').find({"race": id}).assign({"status": "lost"}).write();
         for (h of raceHorses) {
             ranks.push(h[3]);
             scores.push([h[2]]);
