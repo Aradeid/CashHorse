@@ -1,12 +1,8 @@
 module.exports = function(app) {
 
     app.post('/races', (req, res) => {
-        if (!res.locals.userid) {
-            res.sendStatus(403);
-            return;
-        }
         var user = app.storage.get("users").find({"id": res.locals.userid}).value();
-        if (user.role != "admin") {
+        if (user && user.role != "admin") {
             res.sendStatus(403);
             return;
         }
@@ -47,5 +43,107 @@ module.exports = function(app) {
         race.horses = app.storage.get("horses").filter((horse) => race.horses.includes(horse.id)).value();
         res.send(race);
       });
+
+    app.get('/api/races/:id/execute', function(req, res) {
+        var user = app.storage.get("users").find({"id": res.locals.userid}).value();
+        if (user && user.role != "admin") {
+            res.sendStatus(403);
+            return;
+        }
+        var id = parseInt(req.params.id);
+        var race = app.storage.get("races").find({"id": id}).value();
+        if (!race) {
+            res.sendStatus(404);
+            return;
+        }
+        race = app.storage.get('races').find({"id": id}).assign({"status": "finished"}).value();
+        raceHorses = [];
+        for (let idx in race.horses) {
+            horse = app.storage.get('horses').find({"id": race.horses[idx]}).value();
+            pow = (race.mods ? race.mods[idx] : 1)*horse.power;
+            raceHorses.push([horse.id, pow, 2000]);
+        }
+
+        rank = 1;
+        offset = 0;
+        finishReached = false;
+        while (finishReached)
+            for (let ds in raceHorses) {
+                ds[2] -= (Math.floor(Math.random() * 30 - 15) /100 * ds[1]) //a random power sway up to 15% in any direction every tick
+                
+                if (ds[2] <= 0) {
+                    if (offset > ds[2]) {
+                        finishReached = true;
+                        offset = ds[2]
+                    }
+
+                } 
+            }
+
+        //boring and inefficient sorting function
+        for (let h in raceHorses) {
+            //adjust offset
+            ds[2] += offset
+        }
+
+        sortedHorses = Array.from(raceHorses);
+        sortedHorses.sort((a,b) => a[2] - b[2]);
+        for (h in raceHorses) {
+            h[3] = sortedHorses.indexOf(h) + 1;
+        }
+        ranks = []
+        scores = []
+        for (h in raceHorses) {
+            ranks.push(h[3]);
+            scores.push([h[2]]);
+            if (h[3] == 1) {
+                bets = app.storage.get('bets').find({"race": id, "horse": h[0]}).assign({"status": "won"}).value();
+                if (bets.assign) {
+                    continue;
+                }
+                for (let bet in bets) {
+                    //pay out the winners
+                    user = app.storage.get('users').find({"id": bet.user}).value();
+                    app.storage.get('users').find({"id": bet.user}).assign({"balance": user.balance + bet.won});
+                }
+            } else {
+                app.storage.get('bets').find({"race": id, "horse": h[0]}).assign({"status": "lost"}).value();
+            }
+        }
+        race = app.storage.get('races').find({"id": id}).assign({"scores": scores, "ranks": ranks}).value();
+        res.send(race);
+    });
+
+    app.get('/api/races/:id/cancel', function(req, res) {
+        console.log(res.locals.userid);
+        var user = app.storage.get("users").find({"id": res.locals.userid}).value();
+        console.log(user);
+        if (user && user.role != "admin") {
+            res.sendStatus(403);
+            return;
+        }
+        console.log("user checked");
+        var id = parseInt(req.params.id);
+        var race = app.storage.get("races").find({"id": id}).value();
+        if (!race) {
+            res.sendStatus(404);
+            return;
+        }
+        console.log("race checked");
+        ra = app.storage.get('races').find({"id": id}).assign({"status": "cancelled"}).value();
+        console.log(ra);
+        bets = app.storage.get('bets').find({"race": id}).assign({"status": "cancelled"}).value();
+        console.log(bets);
+        if (bets.assign) {
+            res.send(race);
+        }
+        for (let bet in bets) {
+            //refund all participants
+            console.log(bet);
+            user = app.storage.get('users').find({"id": bet.user}).value();
+            app.storage.get('users').find({"id": bet.user}).assign({"balance": user.balance + bet.value});
+        }
+        res.send(race);
+    });
 
 }

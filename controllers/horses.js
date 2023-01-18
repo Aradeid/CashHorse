@@ -2,7 +2,7 @@ module.exports = function(app){
 
     app.post('/api/horses', (req, res) => {
         var user = app.storage.get("users").find({"id": res.locals.userid}).value();
-        if (user.role != "admin") {
+        if (user && user.role != "admin") {
             res.sendStatus(403);
             return;
         }
@@ -58,7 +58,7 @@ module.exports = function(app){
 
     app.delete('/api/horses/:id', function(req, res){
         var user = app.storage.get("users").find({"id": res.locals.userid}).value();
-        if (user.role != "admin") {
+        if (user && user.role != "admin") {
             res.sendStatus(403);
             return;
         }

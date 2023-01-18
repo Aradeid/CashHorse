@@ -119,7 +119,7 @@
     {
       "username": "Mihail",
       "password": "$2b$10$.ugCm4bsMvMI84nzDNAq1ujT4WhTvXQ22sbc8scxkYsktfyHOk9V6",
-      "role": "user",
+      "role": "admin",
       "balance": 1000,
       "index": 9
     }
