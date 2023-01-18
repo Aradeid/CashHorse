@@ -34,7 +34,15 @@ module.exports = function(app) {
     });
 
     app.get('/races/:id', (req, res) => {
-        res.render('pages/race', {id: req.params.id});
+        var id = parseInt(req.params.id);
+        var race = app.storage.get("races").find({"id": id}).value();
+        if (!race) {
+            res.sendStatus(404);
+            return;
+        }
+        var user = app.storage.get("users").find({"id": res.locals.userid}).value();
+        isAdmin = user && user.role == "admin";
+        res.render('pages/race', {id: id, isAdmin: isAdmin, racePending: race.status == "pending"});
     });
 
     app.get('/api/races/', function(req, res) {

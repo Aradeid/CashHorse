@@ -120,7 +120,7 @@
       "username": "Mihail",
       "password": "$2b$10$.ugCm4bsMvMI84nzDNAq1ujT4WhTvXQ22sbc8scxkYsktfyHOk9V6",
       "role": "admin",
-      "balance": 1000,
+      "balance": 920,
       "id": 9
     },
     {
@@ -131,7 +131,48 @@
       "id": 10
     }
   ],
-  "bets": [],
+  "bets": [
+    {
+      "user": 9,
+      "race": 0,
+      "horse": 0,
+      "value": 40,
+      "win": 90,
+      "status": "pending"
+    },
+    {
+      "user": 9,
+      "race": 2,
+      "horse": 3,
+      "value": 150,
+      "win": 200,
+      "status": "pending"
+    },
+    {
+      "user": 9,
+      "race": 2,
+      "horse": 3,
+      "value": 70,
+      "win": 105,
+      "status": "pending"
+    },
+    {
+      "user": 9,
+      "race": 2,
+      "horse": 6,
+      "value": 100,
+      "win": 300,
+      "status": "pending"
+    },
+    {
+      "user": 9,
+      "race": 1,
+      "horse": 0,
+      "value": 80,
+      "win": 80,
+      "status": "pending"
+    }
+  ],
   "races": [
     {
       "time": "2022-12-15T21:59",

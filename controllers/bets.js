@@ -32,7 +32,10 @@ module.exports = function(app){
             res.sendStatus(403);
             return;
         }
-        bet = app.storage.get("bets").find({"user": res.locals.userid, "race": parseInt(req.params.id)});
+        bet = app.storage.get("bets").find({"user": res.locals.userid, "race": parseInt(req.params.id)}).value();
+        if (!bet) {
+            bet = {};
+        }
         res.end(JSON.stringify(bet));
     });
 

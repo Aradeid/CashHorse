@@ -81,7 +81,6 @@ const getRaces = () => {
             a.href = "/races/" + race.id;
             a.innerHTML = `
                 <p class="race-description">${race.description}</p>
-                <p class="race-breed">${race.breed}</p>
             `
             document.getElementsByClassName('race-list')[0].appendChild(a);
         }
@@ -116,12 +115,14 @@ const getRace = (id) => {
         pDesc = document.createElement('p');
         pDesc.innerHTML = data.race.description;
         parentDiv.appendChild(pDesc);
+        pStatus = document.createElement('p');
+        pStatus.innerHTML = data.race.status;
+        parentDiv.appendChild(pStatus);
         subDiv = document.createElement('div');
         subDiv.classList.add("race-horses");
         
         parentSelect = document.getElementsByClassName("horse-bet-select")[0];
         for (let horse of data.horses) {
-            console.log(horse);
             horseDiv = document.createElement('div');
             horseDiv.classList.add("horse-list-item");
             horseDiv.classList.add("list-item");
@@ -133,6 +134,13 @@ const getRace = (id) => {
                 <p class="horse-power">${horse.power}</p>
                 <p class="horse-breed">${horse.breed}</p>
             `
+
+            if (data.race.status == "finishd") {
+                horseDiv.innerHTML += `
+                    <p class="horse-rank">${horse.rank}</p>
+                    <p class="horse-score">${horse.score}</p>
+                `
+            }
             subDiv.appendChild(horseDiv);
 
             option = document.createElement("option");
@@ -199,6 +207,32 @@ const getHorse = (id) => {
             <p class="horse-breed">${horse.breed}</p>
         `
         document.getElementsByClassName('horse-container')[0].appendChild(parentDiv);
+    });
+}
+
+const getBetForRace = (id) => {
+    fetch('/api/bets/forRace/' + id).then((res) => {
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`);
+        }
+        return res.json();
+    }).then((bet) => {
+        console.log(bet);
+        if (bet.value) {
+            document.getElementsByClassName('addBetContainer')[0].innerHTML = `
+            <div>
+                <p>Bet: ${bet.value}</p>
+                <p>Potential:${bet.win}</p>
+                <p>${bet.status}</p>
+            </div>
+            `
+        } else {
+            document.getElementsByClassName('addBetContainer')[0].innerHTML =   `
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBetModal">
+                Place a Bet
+            </button>
+            `
+        }
     });
 }
 
