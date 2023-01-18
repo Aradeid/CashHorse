@@ -111,18 +111,18 @@ const getRace = (id) => {
     }).then((race) => {
         parentDiv = document.createElement('div');
         parentDiv.classList.add('race-data');
-        pDate = document.createElement('p');
-        pDate.innerHTML = race.date;
-        parentDiv.appendChild(pDate);
+        pTime = document.createElement('p');
+        pTime.innerHTML = race.time;
+        parentDiv.appendChild(pTime);
         pDesc = document.createElement('p');
-        pDesc.innerHTML = race.desription;
+        pDesc.innerHTML = race.description;
         parentDiv.appendChild(pDesc);
         subDiv = document.createElement('div');
         subDiv.classList.add("race-horses");
         
         parentSelect = document.getElementsByClassName("horse-bet-select")[0];
 
-        for (let horse of race.horse) {
+        for (let horse of race.horses) {
             horseDiv = document.createElement('div');
             horseDiv.classList.add("horse-list-item");
             horseDiv.classList.add("list-item");
@@ -140,7 +140,9 @@ const getRace = (id) => {
             option.value = horse.id;
             option.innerHTML = horse.name;
 
-            parentSelect.appendChild(option);
+            if (parentSelect) {
+                parentSelect.appendChild(option);
+            }
         }
         parentDiv.appendChild(subDiv);
         document.getElementsByClassName('race-container')[0].appendChild(parentDiv);

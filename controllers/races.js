@@ -33,6 +33,10 @@ module.exports = function(app) {
         res.render('pages/races', {isAdmin: isAdmin})
     });
 
+    app.get('/races/:id', (req, res) => {
+        res.render('pages/race', {id: req.params.id});
+    });
+
     app.get('/api/races/', function(req, res) {
         races = app.storage.get("races").value();
         res.send(races);
@@ -45,7 +49,7 @@ module.exports = function(app) {
             res.sendStatus(404);
             return;
         }
-        race.horses = app.storage.get("horses").filter((horse) => race.horses.includes(horse.id)).value();
+        //race.horses = app.storage.get("horses").filter((horse) => race.horses.includes(horse.id)).value();
         res.send(race);
       });
 
