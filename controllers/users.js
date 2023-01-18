@@ -42,8 +42,6 @@ module.exports = function(app){
                 res.send('Username taken!');
                 return
             }
-            console.log(password);
-            console.log(hash);
             user.username = username;
             user.password = hash;
             user.role = "user";
