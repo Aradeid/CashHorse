@@ -5,13 +5,6 @@ module.exports = function(app){
         res.render('pages/bets', {bets: bets});
     });
 
-    //TODO delete?
-    app.get('/bets/:id', function(req, res) {
-        var id = req.params.id;
-        var bet //= db.getBet(id)
-        res.render('pages/bet', {bet: bet});
-      });
-
     app.get('/api/bets/:id', function(req, res) {
         var id = parseInt(req.params.id);
         var bet = app.storage.get("bets").find({"id": id}).value();
@@ -44,7 +37,7 @@ module.exports = function(app){
     });
 
     app.post('/api/bets', (req, res) => {
-        if (!res.locals.userid) {
+        if (!res.locals.userid || req.body.betValue <= 0) {
             res.sendStatus(403);
             return;
         }
