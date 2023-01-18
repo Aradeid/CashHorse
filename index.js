@@ -44,6 +44,7 @@ function checkLoggedIn(req, res, next) {
 	res.locals.loggedin = req.session.loggedin;
 	if (req.session.loggedin) {
 		res.locals.username = req.session.username;
+        res.locals.userid = req.session.userid;
 	}
     next()//route or no params?
 }

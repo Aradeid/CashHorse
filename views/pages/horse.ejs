@@ -12,12 +12,9 @@
     </header>
 
     <main>
-        <img src="images/horses/<%= horse.image %>">
-        <p class="horse-name"><%= horse.name %></p>
-        <p class="horse-power"><%= horse.power %></p>
-        <p class="horse-breed"><%= horse.breed %></p>
-
-        <button type="button" class="btn btn-danger" onclick="deleteHorse(<%= horse.id %>)">Delete</button>
+        <div class="item-container horse-container"></div>
+        <script>getHorse(<%= id %>)</script>
+        <button type="button" class="btn btn-danger" onclick="deleteHorse(<%= id %>)">Delete</button>
     </main>
 
     <footer>

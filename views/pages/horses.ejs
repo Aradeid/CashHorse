@@ -13,7 +13,7 @@
 
     <main>
         <div class="container">
-            <% if (allowAddingHorses) { %>
+            <% if (isAdmin) { %>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHorseModal">
                     Add horse
                 </button>

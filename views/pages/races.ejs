@@ -12,23 +12,16 @@
     </header>
 
     <main>
-        <div class="container">
-            
+        <% if (isAdmin) { %>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRaceModal">
                 Add race
             </button>
-            <% if (races && races.length > 0) { %>
-                <div class="item-list race-list">
-                    <% for(var i=0; i < races.length; i++) { %>
-                        <a class="list-item race-list-item" href="/races/<%= races[i].id %>">
-                            <p class="race-description"><%= races[i].description %></p>
-                            <p class="race-breed"><%= races[i].breed %></p>
-                        </a>
-                    <% } %>
-                </div>
-            <% } else { %>
-                <p class="empty-list">No races are present in the system. Please create one!</p>
-            <% } %>
+        <% } %>
+        <div class="container">
+            <script>getRaces()</script>
+            <div class="item-list race-list">
+            </div>
+            <p class="empty-list">No races are present in the system. Please wait for an admin to add some!</p>
         </div>
         
         <div id="addRaceModal" class="modal fade" tabindex="-1" role="dialog">
@@ -52,14 +45,9 @@
                                 <input class="form-control" name="raceDescription" id="raceDescription" required>
                             </div>
 
-                            <div class="form-group checkbox-group">
-                                <% for(var i=0; i < horses.length; i++) { %>
-                                    <input class="form-check-input" type="checkbox" name="raceHorse<%= horses[i].id %>" id="raceHorse<%= horses[i].id %>" value="">
-                                    <label class="form-check-label" for="raceHorse<%= horses[i].id %>">
-                                        <img src="images/horses/<%= horses[i].image %>">
-                                        <p class="horse-name"><%= horses[i].name %></p>
-                                    </label>
-                                <% } %>
+                            <script>buildHorseCheckboxes()</script>
+                            <div class="form-group checkbox-group add-race-group">
+                                
                             </div>
         
                             <button type="submit" class="btn btn-primary">Submit</button>

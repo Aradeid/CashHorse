@@ -133,7 +133,8 @@
         0,
         5
       ],
-      "id": 0
+      "id": 0,
+      "status": "pending"
     },
     {
       "time": "2023-01-07T07:08",
@@ -141,7 +142,8 @@
       "horses": [
         0
       ],
-      "id": 1
+      "id": 1,
+      "status": "pending"
     },
     {
       "time": "2022-12-25T23:13",
@@ -150,7 +152,8 @@
         3,
         6
       ],
-      "id": 2
+      "id": 2,
+      "status": "pending"
     }
   ],
   "indexes": [

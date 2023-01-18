@@ -5,7 +5,7 @@ module.exports = function(app){
         if (username && password) {
             var user = app.storage.get("users").find({"username": username}).value();
             if (!user) {
-                res.send('Incorrect Username and/or Password!');
+                res.send('Incorrect Username or Password!');
                 res.end();
                 return;
             }
@@ -13,10 +13,12 @@ module.exports = function(app){
                 if (out) {
                     req.session.loggedin = true;
                     req.session.username = username;
+                    req.session.userid = parseInt(user.id);
+                    req.session.userbalance = parseInt(user.balance);
                     res.redirect('/horses');
                     return;
                 }
-                res.send('Incorrect Username and/or Password!');
+                res.send('Incorrect Username or Password!');
                 res.end();
             }).catch(err => console.error(err.message));
         } else {
@@ -50,6 +52,8 @@ module.exports = function(app){
             app.storage.get('users').push(user).write();
             req.session.loggedin = true;
             req.session.username = username;
+            req.session.userid = parseInt(user.index);
+            req.session.userbalance = parseInt(user.balance);
             res.redirect('/');
             return;
         }).catch(err => console.error(err.message));
@@ -63,6 +67,10 @@ module.exports = function(app){
                     res.status(400).send('Unable to log out');
                 } else {
                     // res.send('Logout successful');
+                    res.locals.userid = undefined;
+                    res.locals.username = undefined;
+                    res.locals.userbalance = undefined;
+                    res.locals.loggedin = false;
                     res.redirect('/');
                 }
             });

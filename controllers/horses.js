@@ -1,6 +1,11 @@
 module.exports = function(app){
 
     app.post('/api/horses', (req, res) => {
+        var user = app.storage.get("users").find({"id": res.locals.userid}).value();
+        if (user.role != "admin") {
+            res.sendStatus(403);
+            return;
+        }
         let horse = {};
         horse.name = req.body.horseName;
         horse.power = req.body.horsePower;
@@ -8,7 +13,8 @@ module.exports = function(app){
         horse.breed = req.body.horseBreed;
 
         if (!horse.name || !horse.power || !horse.breed) {
-            //TODO throw error
+            res.sendStatus(403);
+            return;
         }
         horse.id = app.storage.getIndexFor("horses");
         app.storage.get('horses').push(horse).write();
@@ -23,17 +29,16 @@ module.exports = function(app){
             allowAddingHorses = true;
         }
         horses = app.storage.get("horses").value();
-        res.render('pages/horses', {horses: horses, allowAddingHorses: allowAddingHorses})
+        var user = app.storage.get("users").find({"id": res.locals.userid}).value();
+        isAdmin = user && user.role == "admin";
+        res.render('pages/horses', {isAdmin: isAdmin})
     });
 
     app.get('/horses/:id', function(req, res) {
         var id = parseInt(req.params.id);
-        var horse = app.storage.get("horses").find({"id": id}).value();
-        if (!horse) {
-            res.sendStatus(404);
-            return;
-        }
-        res.render('pages/horse', {horse: horse});
+        var user = app.storage.get("users").find({"id": res.locals.userid}).value();
+        isAdmin = user && user.role == "admin";
+        res.render('pages/horse', {isAdmin: isAdmin, id: id});
       });
     
     app.get('/api/horses', (req, res) => {
@@ -41,9 +46,24 @@ module.exports = function(app){
         res.end(JSON.stringify(horses));
     });
 
+    app.get('/api/horses/:id', function(req, res) {
+        var id = parseInt(req.params.id);
+        var horse = app.storage.get("horses").find({"id": id}).value();
+        if (!horse) {
+            res.sendStatus(404);
+            return;
+        }
+        res.send(horse);
+      });
+
     app.delete('/api/horses/:id', function(req, res){
+        var user = app.storage.get("users").find({"id": res.locals.userid}).value();
+        if (user.role != "admin") {
+            res.sendStatus(403);
+            return;
+        }
         var id = req.params.id;
         app.storage.get('horses').remove((h) => h.id == id).write();
         res.redirect('/horses');
-    })
+    });
 }
