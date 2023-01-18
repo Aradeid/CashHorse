@@ -84,7 +84,7 @@ module.exports = function(app) {
             res.sendStatus(404);
             return;
         }
-        race = app.storage.get('races').find({"id": id}).assign({"status": "finished"}).value();
+        race = app.storage.get('races').find({"id": id}).assign({"status": "finished"}).write();
         raceHorses = [];
         for (let idx of  race.horses) {
             horse = app.storage.get('horses').find({"id": race.horses[idx]}).value();
@@ -125,20 +125,20 @@ module.exports = function(app) {
             ranks.push(h[3]);
             scores.push([h[2]]);
             if (h[3] == 1) {
-                bets = app.storage.get('bets').find({"race": id, "horse": h[0]}).assign({"status": "won"}).value();
+                bets = app.storage.get('bets').find({"race": id, "horse": h[0]}).assign({"status": "won"}).write();
                 if (bets && !Array.isArray(bets)) {
                     bets = [bets];
                 }
                 for (let bet of bets) {
                     //pay out the winners
                     user = app.storage.get('users').find({"id": bet.user}).value();
-                    app.storage.get('users').find({"id": bet.user}).assign({"balance": user.balance + bet.won});
+                    app.storage.get('users').find({"id": bet.user}).assign({"balance": user.balance + bet.won}).write();
                 }
             } else {
-                app.storage.get('bets').find({"race": id, "horse": h[0]}).assign({"status": "lost"}).value();
+                app.storage.get('bets').find({"race": id, "horse": h[0]}).assign({"status": "lost"}).wrte();
             }
         }
-        race = app.storage.get('races').find({"id": id}).assign({"scores": scores, "ranks": ranks}).value();
+        race = app.storage.get('races').find({"id": id}).assign({"scores": scores, "ranks": ranks}).write();
         res.send(race);
     });
 
@@ -157,15 +157,15 @@ module.exports = function(app) {
             res.sendStatus(404);
             return;
         }
-        ra = app.storage.get('races').find({"id": id}).assign({"status": "cancelled"}).value();
-        bets = app.storage.get('bets').find({"race": id}).assign({"status": "cancelled"}).value();
+        ra = app.storage.get('races').find({"id": id}).assign({"status": "cancelled"}).write();
+        bets = app.storage.get('bets').find({"race": id}).assign({"status": "cancelled"}).write();
         if (bets && !Array.isArray(bets)) {
             bets = [bets];
         }
         for (let bet of bets) {
             //refund all participants
             user = app.storage.get('users').find({"id": bet.user}).value();
-            app.storage.get('users').find({"id": bet.user}).assign({"balance": user.balance + bet.value});
+            app.storage.get('users').find({"id": bet.user}).assign({"balance": user.balance + bet.value}).write();
         }
         res.send(race);
     });

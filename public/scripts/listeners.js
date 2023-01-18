@@ -218,7 +218,6 @@ const getBetForRace = (id) => {
         }
         return res.json();
     }).then((bet) => {
-        console.log(bet);
         if (bet.value) {
             document.getElementsByClassName('addBetContainer')[0].innerHTML = `
             <div>
