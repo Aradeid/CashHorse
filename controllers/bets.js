@@ -85,7 +85,8 @@ module.exports = function(app){
         bet.status = "pending";
         app.storage.get('bets').push(bet).write();
         app.storage.get('users').find({"id": res.locals.userid}).assign({"balance": res.locals.userbalance - bet.value}).write();
-        res.locals.userbalance -= bet.value;
+        req.session.userbalance = res.locals.userbalance - bet.value;
+        req.sess
         // res.send(bet);
         res.redirect('/races/'+req.body.raceId);
     });
