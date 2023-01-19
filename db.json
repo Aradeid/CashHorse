@@ -96,7 +96,7 @@
       "power": "50",
       "breed": "Eldrich Horror",
       "id": 15,
-      "image": "horse-14.jpg"
+      "image": "horse-14.png"
     },
     {
       "name": "League",
@@ -139,7 +139,7 @@
       "username": "Mihail",
       "password": "$2b$10$.ugCm4bsMvMI84nzDNAq1ujT4WhTvXQ22sbc8scxkYsktfyHOk9V6",
       "role": "admin",
-      "balance": null,
+      "balance": 2200,
       "id": 9
     },
     {
@@ -190,6 +190,14 @@
       "value": 80,
       "win": 80,
       "status": "won"
+    },
+    {
+      "user": 9,
+      "race": 3,
+      "horse": 14,
+      "value": 800,
+      "win": 53000,
+      "status": "pending"
     }
   ],
   "races": [

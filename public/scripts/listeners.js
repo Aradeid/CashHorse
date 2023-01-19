@@ -19,13 +19,13 @@ const getHorses = () => {
             parentDiv = document.createElement("div");
             parentDiv.classList.add('list-item');
             parentDiv.classList.add('horse-list-item');
+            parentDiv.classList.add('d-inline-flex');
+            parentDiv.classList.add('flex-column');
+            parentDiv.classList.add('p-2');
             parentDiv.innerHTML = `
-            <div class=" ">
                 <img src="images/horses/${horse.image}">
                 <a class="horse-name" href="/horses/${horse.id}">${horse.name}</a>
-                <p class="horse-power">${horse.power}</p>
-                <p class="horse-breed">${horse.breed}</p>
-            </div>
+                <p class="horse-power">[${horse.breed}] ${horse.power} pw</p>
             `
             document.getElementById("horse-list").appendChild(parentDiv);
         }

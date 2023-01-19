@@ -66,6 +66,10 @@ app.post('/users', (req, res) => {
     //show own bets by default and all bets with admin rights
 });
 
+app.get('/refresh', (req, res) => {
+    res.render("pages/refresh");
+});
+
 require('./controllers/horses')(app);
 require('./controllers/races')(app);
 require('./controllers/bets')(app);
