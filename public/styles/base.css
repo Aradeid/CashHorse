@@ -23,3 +23,8 @@
     font-size: 24;
     font-weight: bold;
 }
+
+.navbar {
+    padding-left: 6%;
+    padding-right: 6%;
+}
