@@ -96,7 +96,7 @@
       "power": "50",
       "breed": "Eldrich Horror",
       "id": 15,
-      "image": "horse-14.png"
+      "image": "horse-14.jpg"
     },
     {
       "name": "League",
@@ -148,6 +148,13 @@
       "role": "user",
       "balance": 1000,
       "id": 10
+    },
+    {
+      "username": "Tester",
+      "password": "$2b$10$55N1bz7skW.LEm0isHsXeexwuZRm1hPjnM8XunIYJQ/lMYQVjhQK6",
+      "role": "user",
+      "balance": 1000,
+      "id": 11
     }
   ],
   "bets": [
@@ -272,7 +279,7 @@
     },
     {
       "table": "users",
-      "index": 10
+      "index": 11
     }
   ]
 }

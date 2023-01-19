@@ -127,9 +127,11 @@ const getRace = (id) => {
             horseDiv.classList.add("horse-list-item");
             horseDiv.classList.add("list-item");
             horseDiv.classList.add("race-horse-list-item");
+            horseDiv.classList.add("border");
+            horseDiv.classList.add("border-secondary");
             horseDiv.innerHTML =
             `
-                <img src="images/horses/${horse.image}">
+                <img src="/images/horses/${horse.image}">
                 <a class="horse-name" href="/horses/${horse.id}">${horse.name}</a>
                 <p class="horse-power">${horse.power}</p>
                 <p class="horse-win">${horse.win}</p>

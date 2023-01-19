@@ -28,3 +28,19 @@
     padding-left: 6%;
     padding-right: 6%;
 }
+
+main > button {
+    margin-left: 60px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.form-check-label > img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;   
+}
+
+.form-check-label > .horse-name {
+    font-size: 20;
+}
